@@ -26,12 +26,14 @@ test('returns conclusion of completed check', async () => {
       check_runs: [
         {
           id: '1',
-          status: 'pending'
+          status: 'pending',
+          name: 'test'
         },
         {
           id: '2',
           status: 'completed',
-          conclusion: 'success'
+          conclusion: 'success',
+          name: 'test'
         }
       ]
     }
@@ -43,8 +45,7 @@ test('returns conclusion of completed check', async () => {
   expect(client.rest.checks.listForRef).toHaveBeenCalledWith({
     owner: 'testOrg',
     repo: 'testRepo',
-    ref: 'abcd',
-    check_name: 'test'
+    ref: 'abcd'
   })
 })
 
@@ -55,7 +56,8 @@ test('polls until check is completed', async () => {
         check_runs: [
           {
             id: '1',
-            status: 'pending'
+            status: 'pending',
+            name: 'test'
           }
         ]
       }
@@ -65,7 +67,8 @@ test('polls until check is completed', async () => {
         check_runs: [
           {
             id: '1',
-            status: 'pending'
+            status: 'pending',
+            name: 'test'
           }
         ]
       }
@@ -76,7 +79,8 @@ test('polls until check is completed', async () => {
           {
             id: '1',
             status: 'completed',
-            conclusion: 'failure'
+            conclusion: 'failure',
+            name: 'test'
           }
         ]
       }
@@ -94,7 +98,8 @@ test(`returns 'timed_out' if exceeding deadline`, async () => {
       check_runs: [
         {
           id: '1',
-          status: 'pending'
+          status: 'pending',
+          name: 'test'
         }
       ]
     }
